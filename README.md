@@ -12,3 +12,4 @@ Testsa projekts kas demonstre unity
 - [ ] Audio source lietojums
 - [ ] Riggid boddy un collider lietojums
 # beans_unity
+# Unity_beam
