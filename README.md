@@ -11,3 +11,4 @@ Testsa projekts kas demonstre unity
 - [ ] Drag and drop lietojums
 - [ ] Audio source lietojums
 - [ ] Riggid boddy un collider lietojums
+# beans_unity
