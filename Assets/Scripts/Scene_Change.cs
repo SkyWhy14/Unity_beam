@@ -9,4 +9,9 @@ public class Scene_Change : MonoBehaviour
     }
     public string SceneName;
 
+    public void OnApplicationQuit()
+    {
+        Application.Quit();
+
+    }
 }
