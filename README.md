@@ -6,8 +6,9 @@ Testsa projekts kas demonstre unity
 - [X] UI input
 - [X] UI text lietojums
 - [X] UI images lietojums
-- [ ] UI radio butto lietojums
-- [ ] UI slider lietojums
-- [ ] Drag and drop lietojums
-- [ ] Audio source lietojums
-- [ ] Riggid boddy un collider lietojums
+- [X] UI radio butto lietojums
+- [X] UI slider lietojums
+- [X] Drag and drop lietojums
+- [X] Audio source lietojums
+- [X] Riggid boddy un collider lietojums
+- [ ] TV PAŠI
