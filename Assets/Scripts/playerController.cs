@@ -1,44 +1,52 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class playerController : MonoBehaviour
 {
-    public float speed = 5f;
-
+    public float moveSpeed = 1f;
     private Rigidbody2D rb;
-    private InputAction moveAction;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private float moveInput;
 
-    void Awake()
+
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // Create Move action in code
-        moveAction = new InputAction("Move", InputActionType.Value, "<Gamepad>/leftStick");
-        moveAction.AddCompositeBinding("2DVector")
-            .With("Up", "<Keyboard>/w")
-            .With("Down", "<Keyboard>/s")
-            .With("Left", "<Keyboard>/a")
-            .With("Right", "<Keyboard>/d")
-            .With("Up", "<Keyboard>/upArrow")
-            .With("Down", "<Keyboard>/downArrow")
-            .With("Left", "<Keyboard>/leftArrow")
-            .With("Right", "<Keyboard>/rightArrow");
+        // animator = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    void OnEnable()
+    // Update is called once per frame
+    void Update()
     {
-        moveAction.Enable();
+        moveInput = 0;
+
+        if (Keyboard.current.leftArrowKey.isPressed)
+        {
+            moveInput = -1;
+        }
+        else if (Keyboard.current.rightArrowKey.isPressed)
+        {
+            moveInput = 1;
+        }
+
+        //animator.SetBool("isMoving", moveInput != 0);
+
+        if (moveInput < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (moveInput > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+
     }
 
-    void OnDisable()
+    private void FixedUpdate()
     {
-        moveAction.Disable();
-    }
-
-    void FixedUpdate()
-    {
-        Vector2 moveInput = moveAction.ReadValue<Vector2>();
-        rb.linearVelocity = moveInput.normalized * speed;
+        rb.MovePosition(rb.position + new Vector2(moveInput * moveSpeed * Time.deltaTime, 0f));
     }
 }

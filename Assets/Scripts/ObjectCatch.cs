@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class ObjectCatch : MonoBehaviour
 {
-    
-
-
-    public float sizeIncrese = 0.5f;
-    public float massIncrese = 1f;
+ 
+    public float sizeIncrease = 0.5f;
+    public float massIncrease = 1f;
     private Rigidbody2D rb;
     SFX_Script sfx;
+
+
     void Start()
     {
         sfx = FindFirstObjectByType<SFX_Script>();
         rb = GetComponent<Rigidbody2D>();
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,13 +23,13 @@ public class ObjectCatch : MonoBehaviour
 
         if (collision.CompareTag("Donut"))
         {
-            sfx.PlaySFX(2);
+            sfx.PlaySFX(4);
             Destroy(collision.gameObject);
-            transform.localScale += new Vector3(sizeIncrese, sizeIncrese, 0f);
-            rb.mass += massIncrese;
+            transform.localScale += new Vector3(sizeIncrease, sizeIncrease, 0);
+            rb.mass += massIncrease;
+
         }
         else
             Debug.Log("Collided with non-donut object: " + collision.gameObject.name);
     }
 }
-

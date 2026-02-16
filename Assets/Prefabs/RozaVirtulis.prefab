@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 778242065339573249}
   - component: {fileID: 7486218842766476314}
   - component: {fileID: 9164797232178762230}
+  - component: {fileID: -5499069131651446636}
   m_Layer: 5
   m_Name: RozaVirtulis
   m_TagString: Donut
@@ -166,3 +167,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5baca15cfdd35564eb31d17607f22d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Drag
+--- !u!114 &-5499069131651446636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394984096914299461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51c4552a32ad3d4399f2c2be04ec7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Catchable
+  scoreValue: 10
