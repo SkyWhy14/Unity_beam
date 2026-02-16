@@ -1,49 +1,48 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Drag : MonoBehaviour,
+    IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private RectTransform rectTransform;
     private Canvas canvas;
-    SFX_Script script;
+    SFX_Script sfxScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        script = FindFirstObjectByType<SFX_Script>();
+        sfxScript = FindFirstObjectByType<SFX_Script>();
         rectTransform = GetComponent<RectTransform>();
     }
 
-    // Implementing IPointerDownHandler
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData data)
     {
         Debug.Log("Izdarīts klikšķis uz velkamā objekta");
-        script.PlaySFX(1);
+        sfxScript.PlaySFX(2);
     }
 
-    // Implementing IBeginDragHandler
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData data)
     {
         Debug.Log("Sākts vilkšanas process");
     }
 
-    // Implementing IDragHandler
-    public void OnDrag(PointerEventData eventData)
+    public void OnDrag(PointerEventData data)
     {
-        Debug.Log("Objekts tiek vilkts");
-        Vector2 mousePosition = eventData.position;
+        Debug.Log("Notiek vilkšana");
+        Vector2 mousePosition = data.position;
         mousePosition.x = Mathf.Clamp(mousePosition.x,
-            0 + rectTransform.rect.width / 2, Screen.width - rectTransform.rect.width / 2);
+            0 + rectTransform.rect.width / 2,
+            Screen.width - rectTransform.rect.width / 2);
 
         mousePosition.y = Mathf.Clamp(mousePosition.y,
-           0 + rectTransform.rect.height / 2, Screen.height - rectTransform.rect.height / 2);
+           0 + rectTransform.rect.height / 2,
+           Screen.height - rectTransform.rect.height / 2);
 
         rectTransform.position = mousePosition;
     }
 
-    // Implementing IEndDragHandler
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag(PointerEventData data)
     {
-        Debug.Log("Vilkšanas process pabeigts");
+        Debug.Log("Beidzies vilkšanas process");
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8880594382861087579}
   - component: {fileID: 778242065339573249}
   - component: {fileID: 7486218842766476314}
+  - component: {fileID: 9164797232178762230}
   m_Layer: 5
   m_Name: RozaVirtulis
   m_TagString: Donut
@@ -113,7 +114,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 75
+  m_Radius: 30
 --- !u!50 &778242065339573249
 Rigidbody2D:
   serializedVersion: 5
@@ -142,6 +143,18 @@ Rigidbody2D:
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &7486218842766476314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394984096914299461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5baca15cfdd35564eb31d17607f22d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Drag
+--- !u!114 &9164797232178762230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -29,8 +29,8 @@ public class DonutBakerScript : MonoBehaviour
     {
         while (true)
         {
-            minpoz = ovenTransform.position.x - 40.0f;
-            maxpoz = ovenTransform.position.x + 40.0f;
+            minpoz = ovenTransform.position.x - 1.0f;
+            maxpoz = ovenTransform.position.x + 1.0f;
             float randPoz = Random.Range(minpoz, maxpoz);
             Vector2 spawnPoz = new Vector2(randPoz, ovenTransform.position.y);
 
