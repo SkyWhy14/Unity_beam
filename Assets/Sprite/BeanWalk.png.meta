@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d99134237155324caf5604154cc5585
+guid: a8802d820c9c3c245864d0f8aa16db5e
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -69,7 +69,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -96,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -137,7 +137,7 @@ TextureImporter:
       name: BeanWalk_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 7
         width: 182
         height: 449
@@ -159,8 +159,8 @@ TextureImporter:
       name: BeanWalk_1
       rect:
         serializedVersion: 2
-        x: 205
-        y: 4
+        x: 210
+        y: 7
         width: 164
         height: 449
       alignment: 7
@@ -203,7 +203,7 @@ TextureImporter:
       name: BeanWalk_3
       rect:
         serializedVersion: 2
-        x: 582
+        x: 589
         y: 3
         width: 163
         height: 449
@@ -226,7 +226,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 785
-        y: 5
+        y: 4
         width: 171
         height: 449
       alignment: 7
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cd70bc4af4bb042448eb5f6928a51a48
+    spriteID: 469785a8c74a5bf44adc3492e9d88f7c
     internalID: 0
     vertices: []
     indices: 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -10,60 +11,59 @@ public class GameManager : MonoBehaviour
     public TMP_Text timerText;
     public GameObject losePanel;
 
-    [Header("Game")]
-    public int startLives = 3;
+    [Header("Lives (Hearts)")]
+    public Image[] hearts;      // iemet 3 Image te
+    public int startLives = 3;  // jābūt = hearts.Length
 
-    [Tooltip(">0 = skaita UZ LEJU, 0 = skaita UZ AUGŠU")]
-    public float countdownSeconds = 0f;
+    [Header("Timer")]
+    public float countdownSeconds = 0f; // 0 = count up, >0 = count down
 
     [Header("Audio")]
     public AudioSource sfxSource;
 
     public bool IsRunning { get; private set; }
 
-    private int score;
-    private int lives;
-    private float time;
+    int score;
+    int lives;
+    float time;
 
-    private void Awake()
+    void Awake()
     {
         if (I != null && I != this) { Destroy(gameObject); return; }
         I = this;
     }
 
-    private void Start()
+    void Start()
     {
         StartGame();
     }
 
     public void StartGame()
     {
-        // Ja kaut kur bija pauze
         Time.timeScale = 1f;
 
         score = 0;
-        lives = startLives;
 
-        if (countdownSeconds > 0f)
-            time = countdownSeconds;
+        // Drošība: ja hearts ir ielikti, paņem lives pēc masīva garuma
+        if (hearts != null && hearts.Length > 0)
+            lives = hearts.Length;
         else
-            time = 0f;
+            lives = startLives;
 
+        time = countdownSeconds > 0 ? countdownSeconds : 0f;
         IsRunning = true;
 
         if (losePanel != null) losePanel.SetActive(false);
 
         UpdateScoreUI();
         UpdateTimerUI();
-
-        Debug.Log("Game started. IsRunning=" + IsRunning + " time=" + time);
+        UpdateHeartsUI();
     }
 
-    private void Update()
+    void Update()
     {
         if (!IsRunning) return;
 
-        // Skaita laiku
         if (countdownSeconds > 0f)
         {
             time -= Time.deltaTime;
@@ -88,40 +88,49 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI();
     }
 
-    public void LoseLife(int amount)
+    public void LoseLife(int amount = 1)
     {
         if (!IsRunning) return;
 
         lives -= amount;
-        if (lives <= 0)
-        {
-            lives = 0;
+        if (lives < 0) lives = 0;
+
+        UpdateHeartsUI();
+
+        if (lives == 0)
             GameOver();
+    }
+
+    void UpdateHeartsUI()
+    {
+        if (hearts == null) return;
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (hearts[i] != null)
+                hearts[i].enabled = (i < lives); // pazūd 1 bilde, kad lives krīt
         }
     }
 
-    private void GameOver()
+    void GameOver()
     {
         IsRunning = false;
         if (losePanel != null) losePanel.SetActive(true);
-
-        Debug.Log("GAME OVER. time=" + time);
     }
 
-    private void UpdateScoreUI()
+    void UpdateScoreUI()
     {
         if (scoreText != null)
-            scoreText.text = $"Score: {score}";
+            scoreText.text = "Score: " + score;
     }
 
-    private void UpdateTimerUI()
+    void UpdateTimerUI()
     {
         if (timerText == null) return;
 
-        int totalSeconds = Mathf.CeilToInt(time);
-        int min = totalSeconds / 60;
-        int sec = totalSeconds % 60;
-
+        int t = Mathf.CeilToInt(time);
+        int min = t / 60;
+        int sec = t % 60;
         timerText.text = $"Time: {min:00}:{sec:00}";
     }
 

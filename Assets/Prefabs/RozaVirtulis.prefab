@@ -180,3 +180,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Catchable
   scoreValue: 10
+  eatSound: {fileID: 8300000, guid: ca514fbc11bd3f5468c413d70e4183b2, type: 3}

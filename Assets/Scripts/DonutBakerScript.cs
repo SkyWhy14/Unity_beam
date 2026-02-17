@@ -1,10 +1,22 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class DonutBakerScript : MonoBehaviour
 {
-    public GameObject[] donutPrefabs; // Changed from GameObject donutPrefab to GameObject[] donutPrefabs
+    [Header("Prefabs")]
+    public GameObject[] donutPrefabs;          // parastie
+    public GameObject[] hazardPrefabs;         // sliktais
+    public GameObject[] specialDonutPrefabs;   // special (piem. zelta)
+
+    [Header("Spawn Settings")]
     public float bakeInterval = 1.0f;
+    public float spawnXRange = 1.0f; // tāpat kā tev bija -1 līdz +1
+
+    [Header("Chances (0..1)")]
+    [Range(0f, 1f)] public float hazardChance = 0.2f;   // 20%
+    [Range(0f, 1f)] public float specialChance = 0.05f; // 5%
+    // Pārējais automātiski būs normal donut
+
     float minpoz, maxpoz;
     Transform ovenTransform;
 
@@ -17,7 +29,7 @@ public class DonutBakerScript : MonoBehaviour
     {
         if (state)
         {
-            StartCoroutine(SpawnDonut());
+            StartCoroutine(SpawnObjects());
         }
         else
         {
@@ -25,17 +37,40 @@ public class DonutBakerScript : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnDonut()
+    IEnumerator SpawnObjects()
     {
         while (true)
         {
-            minpoz = ovenTransform.position.x - 1.0f;
-            maxpoz = ovenTransform.position.x + 1.0f;
+            minpoz = ovenTransform.position.x - spawnXRange;
+            maxpoz = ovenTransform.position.x + spawnXRange;
+
             float randPoz = Random.Range(minpoz, maxpoz);
             Vector2 spawnPoz = new Vector2(randPoz, ovenTransform.position.y);
 
-            int donutIndex = Random.Range(0, donutPrefabs.Length); // Use donutPrefabs.Length
-            Instantiate(donutPrefabs[donutIndex], spawnPoz, Quaternion.identity,ovenTransform);
+            // Random izvēle pēc iespējamībām
+            float r = Random.value;
+
+            // 1) Hazard
+            if (r < hazardChance && hazardPrefabs != null && hazardPrefabs.Length > 0)
+            {
+                int ix = Random.Range(0, hazardPrefabs.Length);
+                Instantiate(hazardPrefabs[ix], spawnPoz, Quaternion.identity, ovenTransform);
+            }
+            // 2) Special donut
+            else if (r < hazardChance + specialChance && specialDonutPrefabs != null && specialDonutPrefabs.Length > 0)
+            {
+                int ix = Random.Range(0, specialDonutPrefabs.Length);
+                Instantiate(specialDonutPrefabs[ix], spawnPoz, Quaternion.identity, ovenTransform);
+            }
+            // 3) Normal donut
+            else
+            {
+                if (donutPrefabs != null && donutPrefabs.Length > 0)
+                {
+                    int ix = Random.Range(0, donutPrefabs.Length);
+                    Instantiate(donutPrefabs[ix], spawnPoz, Quaternion.identity, ovenTransform);
+                }
+            }
 
             yield return new WaitForSeconds(bakeInterval);
         }
