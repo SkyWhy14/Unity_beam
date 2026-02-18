@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class playerController : MonoBehaviour
 {
+    
     public float moveSpeed = 1f;
     private Rigidbody2D rb;
     private Animator animator;
