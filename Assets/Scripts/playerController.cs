@@ -15,11 +15,11 @@ public class playerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         moveInput = 0;
@@ -33,21 +33,21 @@ public class playerController : MonoBehaviour
             moveInput = 1;
         }
 
-        //animator.SetBool("isMoving", moveInput != 0);
+        animator.SetBool("isWalking", moveInput != 0);
 
-        if (moveInput < 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (moveInput > 0)
+        if (moveInput > 0)
         {
             spriteRenderer.flipX = false;
+        }
+        else if (moveInput < 0)
+        {
+            spriteRenderer.flipX = true;
         }
 
     }
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + new Vector2(moveInput * moveSpeed * Time.deltaTime, 0f));
+        rb.MovePosition(rb.position + new Vector2(moveInput * moveSpeed * Time.deltaTime, 0));
     }
 }
